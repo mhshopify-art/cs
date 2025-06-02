@@ -49,12 +49,19 @@
             z-index: 2;
         }
 
-        @media screen and (max-width: 768px) {
-            .text {
-                bottom: 20px;
-                right: 20px; /* Changed from left: 20px to right: 20px */
-            }
-        }
+@media screen and (max-width: 768px) {
+    .text {
+        top: 50%;
+        left: 50%;
+        bottom: auto;
+        right: auto;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        text-align: center;
+        font-size: 18px;
+        position: absolute;
+    }
+}
     </style>
 </head>
 <body>
