@@ -37,31 +37,47 @@
             width: auto;
             height: auto;
             object-fit: cover;
+            /* Add these lines to hide the play button on Safari mobile */
+            &::-webkit-media-controls {
+                display: none !important;
+            }
+            &::-webkit-media-controls-start-playback-button {
+                display: none !important;
+            }
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Add this to ensure video controls are hidden */
+        video::-webkit-media-controls-panel,
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-start-playback-button {
+            display: none !important;
+            -webkit-appearance: none;
         }
 
         .text {
             position: absolute;
             bottom: 40px;
-            right: 40px; /* Changed from left: 40px to right: 40px */
+            right: 40px;
             color: white;
             font-family: 'Bodoni Moda', serif;
             font-size: 20px;
             z-index: 2;
         }
 
-@media screen and (max-width: 768px) {
-    .text {
-        top: 50%;
-        left: 50%;
-        bottom: auto;
-        right: auto;
-        transform: translate(-50%, -50%);
-        width: 100vw;
-        text-align: center;
-        font-size: 18px;
-        position: absolute;
-    }
-}
+        @media screen and (max-width: 768px) {
+            .text {
+                top: 50%;
+                left: 50%;
+                bottom: auto;
+                right: auto;
+                transform: translate(-50%, -50%);
+                width: 100vw;
+                text-align: center;
+                font-size: 18px;
+                position: absolute;
+            }
+        }
     </style>
 </head>
 <body>
@@ -72,7 +88,8 @@
             loop 
             playsinline 
             defaultMuted 
-            webkit-playsinline>
+            webkit-playsinline
+            controls="false">
             <source src="overthemountain.mp4" type="video/mp4">
         </video>
         <div class="text">Launching soon</div>
@@ -81,6 +98,8 @@
         // Ensure video autoplay works on mobile
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.querySelector('video');
+            // Add this line to remove controls programmatically
+            video.controls = false;
             video.play().catch(function(error) {
                 console.log("Video autoplay failed:", error);
             });
